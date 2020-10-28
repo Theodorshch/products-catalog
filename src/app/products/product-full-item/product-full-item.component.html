@@ -1,0 +1,54 @@
+<ng-container *ngIf="fullProductInfo$ | async as productInfo">
+  <div class="product-info">
+    <div class="product-image">
+      <img src="/assets/{{productInfo.img}}" alt="image">
+    </div>
+    <div class="product-description">
+      <h1>{{productInfo.title}}</h1>
+      <div class="desc">{{productInfo.text}}</div>
+    </div>
+  </div>
+
+  <div class="reviews-block" *ngIf="reviews$ | async as reviews">
+    <h2>Reviews:</h2>
+    <div *ngIf="!isUserLogged">To have ability to leave review. Please <a [routerLink]="['/', RouterUrls.Auth, RouterUrls.SignIn]">Sign in</a></div>
+
+    <form *ngIf="isUserLogged" class="new-review" [formGroup]="reviewForm" (ngSubmit)="sendReview(productInfo.id)">
+
+      <div class="review">
+        <div class="rate">
+          <label [class.checked]="rate.value >= 1"><input type="radio" formControlName="rate" [value]="1"></label>
+          <label [class.checked]="rate.value >= 2"><input type="radio" formControlName="rate" [value]="2"></label>
+          <label [class.checked]="rate.value >= 3"><input type="radio" formControlName="rate" [value]="3"></label>
+          <label [class.checked]="rate.value >= 4"><input type="radio" formControlName="rate" [value]="4"></label>
+          <label [class.checked]="rate.value >= 5"><input type="radio" formControlName="rate" [value]="5"></label>
+        </div>
+        <div class="text">
+          <textarea type="text" placeholder="Type your review" formControlName="text"></textarea>
+        </div>
+
+        <button [disabled]="reviewForm.invalid">Send review</button>
+      </div>
+    </form>
+    <div class="review-item" *ngFor="let review of reviews">
+      <div class="review-author">
+        <div class="name">{{review.created_by.username}}</div>
+        <div class="date">{{review.created_at | date}}</div>
+      </div>
+
+      <div class="review">
+        <div class="rate">
+          <div class="markers">
+            <div class="marker" [class.inactive]="review.rate < 1"></div>
+            <div class="marker" [class.inactive]="review.rate < 2"></div>
+            <div class="marker" [class.inactive]="review.rate < 3"></div>
+            <div class="marker" [class.inactive]="review.rate < 4"></div>
+            <div class="marker" [class.inactive]="review.rate < 5"></div>
+          </div>
+        </div>
+        <div class="text">{{review.text}}</div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+

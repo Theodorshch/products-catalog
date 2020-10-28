@@ -1,0 +1,8 @@
+<form class="form-group" [formGroup]="authForm" (ngSubmit)="signUp()">
+  <input type="text" formControlName="username" placeholder="Enter your email">
+  <input type="password" formControlName="password" placeholder="Enter your password">
+  <div class="error" *ngIf="error">{{error}}</div>
+  <button [disabled]="authForm.invalid">Sign up</button>
+  <div>Already have an account? Please <a [routerLink]="['..', RouterUrls.SignIn]">Sign in</a></div>
+</form>
+

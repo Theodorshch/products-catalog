@@ -1,0 +1,41 @@
+.property-card {
+  height: 18em;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 15px 15px 27px #e1e1e3, -15px -15px 27px #ffffff;
+
+  &:hover {
+    .property-image {
+      height: 100%;
+    }
+
+    .property-description {
+      height: 0;
+    }
+  }
+
+  .property-image {
+    height: 40%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .property-description {
+    background-color: #FAFAFC;
+    height: 60%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    transition: all 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+    text-align: center;
+  }
+}

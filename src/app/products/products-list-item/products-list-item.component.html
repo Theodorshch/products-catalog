@@ -1,0 +1,10 @@
+<a [routerLink]="['..', productInfo.id]" class="property-card">
+  <div class="property-image" [style.backgroundImage]="getImageBg(productInfo.img)"></div>
+  <div class="property-description">
+    <h5>{{productInfo.title}}</h5>
+    <p>
+      {{productInfo.text}}
+    </p>
+  </div>
+</a>
+
